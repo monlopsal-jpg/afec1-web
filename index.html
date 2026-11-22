@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFEC1 — Aprende, ahorra, decide, invierte</title>
+<meta name="description" content="AFEC1: educación financiera real para niños y adolescentes. Huchas, paga, retos, bolsa simulada y cursos. Familias y colegios.">
+<style>
+  :root {
+    --verde: #4CAF50;
+    --verde-oscuro: #2E7D32;
+    --verde-fondo: rgba(76, 175, 80, 0.1);
+    --azul: #2196F3;
+    --naranja: #FF9800;
+    --morado: #9C27B0;
+    --texto: #212121;
+    --texto-suave: #616161;
+    --fondo: #FAFAFA;
+    --blanco: #FFFFFF;
+    --radio: 16px;
+    --sombra: 0 4px 14px rgba(0,0,0,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Roboto, 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--blanco);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--verde-oscuro);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+  }
+  .logo-icon {
+    width: 129px; height: 129px;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+  }
+  .logo-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .nav-links { display: flex; gap: 26px; align-items: center; }
+  .nav-links a {
+    color: var(--texto-suave);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--verde-oscuro); }
+  .nav-cta {
+    background: var(--verde);
+    color: white !important;
+    padding: 9px 20px;
+    border-radius: 24px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--verde-oscuro); }
+  #menu-toggle { display: none; }
+  .menu-btn { display: none; font-size: 1.7rem; background: none; border: none; color: var(--verde-oscuro); cursor: pointer; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, #E8F5E9 0%, var(--fondo) 70%);
+    padding: 20px 20px 40px;
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--verde-fondo);
+    color: var(--verde-oscuro);
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .moneda-hero {
+    width: 280px; /* el doble (20-11-26, petición Mónica): antes 140px */
+    display: block;
+    border-radius: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+  /* 20-11-26 noche (petición Mónica): los vídeos NO arrancan solos.
+     Muestran una imagen fija con un botón ▶; al tocarlo se ven y se oyen UNA vez
+     y al terminar se paran y vuelve el ▶ (tocar de nuevo = repetir). Sin bucle. */
+  .moneda-wrap { position: relative; display: inline-block; margin-bottom: 10px; }
+  .btn-play {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px; height: 54px;
+    border-radius: 50%; border: 0;
+    background: rgba(0,0,0,0.62);
+    color: #fff;
+    font-size: 21px; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    padding-left: 4px; /* centra mejor el triángulo ▶ */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    z-index: 5;
+  }
+  .leccion-video .btn-play { width: 40px; height: 40px; font-size: 15px; }
+  .pant-video .btn-play { width: 44px; height: 44px; font-size: 17px; }
+  .reproduciendo .btn-play { display: none; } /* mientras se reproduce, el ▶ desaparece */
+  .moneda-sonido {
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+    background: rgba(0,0,0,0.65);
+    color: #fff;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--texto);
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--verde-oscuro); }
+  .hero p.sub {
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: var(--texto-suave);
+    max-width: 480px;
+    margin-bottom: 30px;
+  }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 28px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .btn-primary {
+    background: var(--verde);
+    color: white;
+    box-shadow: 0 4px 14px rgba(76,175,80,0.35);
+  }
+  .btn-primary:hover { background: var(--verde-oscuro); transform: translateY(-2px); }
+  .btn-outline {
+    border: 2px solid var(--verde);
+    color: var(--verde-oscuro);
+  }
+  .btn-outline:hover { background: var(--verde-fondo); transform: translateY(-2px); }
+
+  /* ===== TELEFONO con PANTALLAS REALES de la app (carrusel CSS puro) ===== */
+  .phone {
+      width: 280px;
+      background: linear-gradient(160deg, #4a4f57, #16181c 55%);
+      border-radius: 42px;
+      padding: 10px;
+      margin: 0 auto;
+      position: relative;
+      box-shadow: inset 0 0 0 2px #0b0d10, 0 3px 8px rgba(0,0,0,0.45), 0 18px 50px rgba(0,0,0,0.35);
+    }
+  .phone-notch {
+    width: 88px; height: 6px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    margin: 2px auto 10px;
+  }
+  .phone-screen {
+      position: relative;
+      border-radius: 32px;
+      overflow: hidden;
+      aspect-ratio: 560 / 1140;
+      background: #FAFAFA;
+      box-shadow: inset 0 0 0 2px #000;
+    }
+  .phone-screen .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    animation: ciclo 16s infinite;
+  }
+  .phone-screen .slide:nth-child(1) { animation-delay: 0s; }
+  .phone-screen .slide:nth-child(2) { animation-delay: -12s; }
+  .phone-screen .slide:nth-child(3) { animation-delay: -8s; }
+  .phone-screen .slide:nth-child(4) { animation-delay: -4s; }
+  @keyframes ciclo {
+    0%, 24%   { opacity: 1; }
+    30%, 94%  { opacity: 0; }
+    100%      { opacity: 1; }
+  }
+  .phone .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 0 2px;
+  }
+  .phone .dots span {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #ddd;
+    animation: dotGlow 16s infinite;
+  }
+  .phone .dots span:nth-child(1) { animation-delay: 0s; }
+  .phone .dots span:nth-child(2) { animation-delay: -12s; }
+  .phone .dots span:nth-child(3) { animation-delay: -8s; }
+  .phone .dots span:nth-child(4) { animation-delay: -4s; }
+  @keyframes dotGlow {
+    0%, 24%   { background: var(--verde); transform: scale(1.2); }
+    30%, 94%  { background: #ddd; transform: scale(1); }
+    100%      { background: var(--verde); transform: scale(1.2); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .phone-screen .slide, .phone .dots span { animation: none; }
+    .phone-screen .slide:nth-child(1), .phone .dots span:nth-child(1) { opacity: 1; }
+  }
+
+  /* ===== TELEFONO con LECCION REAL — réplica EXACTA de la captura de la app (1000295410.jpg, 20-11-26):
+     título grande izquierda + "Paso 1 de 7" gris + barra progreso 1/7 + etiqueta AZUL + vídeo + nota
+     con comillas + botón "Siguiente" pegado abajo + franja Android ||| O < ===== */
+  .leccion {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 12px 12px;
+    background: #FAFAFA;
+    text-align: left;
+  }
+  .leccion-titulo { font-size: 19px; font-weight: 700; color: var(--texto); line-height: 1.25; }
+  .leccion-paso { font-size: 9px; font-weight: 500; color: #757575; margin-top: 20px; }
+  .leccion-pasobar {
+    height: 6px; border-radius: 3px; background: #E0E0E0;
+    overflow: hidden; margin-top: 8px; flex-shrink: 0;
+  }
+  .leccion-pasobar::after { content: ''; display: block; width: 14.3%; height: 100%; background: var(--verde); }
+  .leccion-etiqueta { font-size: 8px; font-weight: 700; color: var(--azul); margin-top: 18px; }
+  .leccion-video {
+    position: relative;
+    width: 100%;
+    margin-top: 16px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #111;
+  }
+  .leccion-video video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain; /* vídeo entero, centrado, sin recortes */
+    display: block;
+  }
+  .leccion-sonido {
+    position: absolute;
+    left: 50%;
+    bottom: 6px;
+    transform: translateX(-50%);
+    border: 0;
+    cursor: pointer;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-family: inherit;
+    font-size: 8.5px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .leccion-nota { font-size: 8px; color: #757575; line-height: 1.5; margin-top: 14px; }
+  .leccion-boton {
+    width: 100%;
+    margin-top: auto; /* espacio libre entre nota y botón, botón pegado abajo (como la app real) */
+    border: 0;
+    cursor: pointer;
+    background: var(--verde);
+    color: #fff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 13px 0;
+    border-radius: 10px;
+  }
+  /* Franja Android idéntica a la de las 4 pantallas de módulos (decisión Mónica 20-11) */
+  .leccion::after {
+    content: '|||   O   <';
+    display: block;
+    margin: 2px -12px -12px;
+    flex-shrink: 0;
+    text-align: center;
+    word-spacing: 1.8em;
+    letter-spacing: 1px;
+    background: #ECEEF0;
+    color: #3C4043;
+    font-size: 13px;
+    padding: 2px 10px 4px;
+    border-top: 1px solid #3C4043;
+  }
+
+  /* ===== SECCIONES ===== */
+  section { padding: 70px 20px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  .kicker {
+    color: var(--verde);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 14px; }
+  .lead { color: var(--texto-suave); max-width: 640px; margin-bottom: 40px; }
+
+  /* Modulos */
+  .modulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+  }
+  .modulo {
+    background: white;
+    border-radius: var(--radio);
+    padding: 28px 24px;
+    box-shadow: var(--sombra);
+    border-top: 4px solid var(--verde);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .modulo:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.1); }
+  .modulo.azul { border-top-color: var(--azul); }
+  .modulo.naranja { border-top-color: var(--naranja); }
+  .modulo.morado { border-top-color: var(--morado); }
+  .modulo .mi {
+    width: 50px; height: 50px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    background: var(--verde-fondo);
+  }
+  .modulo.azul .mi { background: rgba(33,150,243,0.12); }
+  .modulo.naranja .mi { background: rgba(255,152,0,0.12); }
+  .modulo.morado .mi { background: rgba(156,39,176,0.12); }
+  .modulo h3 { margin-bottom: 8px; }
+  .modulo p { color: var(--texto-suave); font-size: 0.95rem; }
+  .modulo h3.c-verde { color: var(--verde-oscuro); }
+  .modulo h3.c-azul { color: var(--azul); }
+  .modulo h3.c-naranja { color: #E65100; }
+  .modulo h3.c-morado { color: var(--morado); }
+
+  /* Familias / Colegios */
+  .publicos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+  }
+  .publico {
+    background: white;
+    border-radius: var(--radio);
+    padding: 34px 30px;
+    box-shadow: var(--sombra);
+  }
+  .publico h3 { color: var(--verde-oscuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .publico ul { list-style: none; }
+  .publico li {
+    padding: 9px 0 9px 30px;
+    position: relative;
+    color: var(--texto-suave);
+    font-size: 0.97rem;
+    border-bottom: 1px dashed #eee;
+  }
+  .publico li:last-child { border-bottom: none; }
+  .publico li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--verde);
+    font-weight: 700;
+  }
+
+  /* Como funciona */
+  .pasos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    counter-reset: paso;
+  }
+  .paso {
+    background: white;
+    border-radius: var(--radio);
+    padding: 30px 26px;
+    box-shadow: var(--sombra);
+    position: relative;
+  }
+  .paso::before {
+    counter-increment: paso;
+    content: counter(paso);
+    width: 44px; height: 44px;
+    background: var(--verde);
+    color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  .paso h4 { margin-bottom: 8px; }
+  .paso p { color: var(--texto-suave); font-size: 0.95rem; }
+
+  /* Seguridad */
+  .seguridad {
+    background: white;
+    border-radius: var(--radio);
+    padding: 34px 30px;
+    box-shadow: var(--sombra);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+  .seguridad .candado {
+    width: 64px; height: 64px;
+    background: var(--verde-fondo);
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+  }
+
+  /* CTA final */
+  .cta-final {
+    background: linear-gradient(135deg, var(--verde-oscuro), var(--verde));
+    border-radius: 24px;
+    padding: 60px 40px;
+    text-align: center;
+    color: white;
+  }
+  .cta-final h2 { color: white; }
+  .cta-final p { opacity: 0.9; margin-bottom: 28px; font-size: 1.05rem; }
+  .cta-final .btn {
+    background: white;
+    color: var(--verde-oscuro);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+  .cta-final .btn:hover { transform: translateY(-2px); }
+
+  /* Footer */
+  footer {
+    background: #1B5E20;
+    color: rgba(255,255,255,0.85);
+    padding: 40px 20px;
+    margin-top: 40px;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer a { color: rgba(255,255,255,0.85); text-decoration: none; margin-left: 22px; }
+  footer a:hover { color: white; }
+
+  /* Reveal animation */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero p.sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .publicos { grid-template-columns: 1fr; }
+    .pasos { grid-template-columns: 1fr; }
+    .menu-btn { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: white;
+      flex-direction: column;
+      padding: 20px;
+      gap: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    #menu-toggle:checked ~ .nav-links { display: flex; }
+  }
+
+  /* ---- Detalle de módulos (#que-es): la pantalla real de la app en un móvil ---- */
+  #que-es .modulo { cursor: pointer; transition: transform .15s, box-shadow .15s; }
+  #que-es .modulo:hover { transform: translateY(-3px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
+  #que-es .modulo.activa { outline: 3px solid var(--verde); }
+  .modulo-detalle { display: none; }
+  /* 20-11-26 noche (petición Mónica): el móvil sale FLOTANTE en mitad de la pantalla
+     (ventana centrada sobre fondo oscuro), en ordenador y en móvil igual */
+  .modulo-detalle.abierto { display: flex; position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.62); flex-direction: column; align-items: center; justify-content: center; padding: 28px 18px; overflow-y: auto; } /* 21-11-26: padding 28px arriba/abajo para dar aire al teléfono flotante (p. ej. Emprende) */
+  .modulo-rotulo { flex-shrink: 0; margin-bottom: 12px; background: rgba(255,255,255,0.94); color: var(--verde-oscuro); font-weight: 700; font-size: 13px; letter-spacing: .6px; text-align: center; padding: 7px 16px; border-radius: 999px; }
+  .modulo-cerrar { position: absolute; top: 12px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.94); color: #333; font-size: 19px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.3); z-index: 10; }
+  .modulo-detalle .pant { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 8px; padding: 12px 10px; background: #FAFAFA; overflow: hidden; }
+  .pant-cabecera { background: var(--verde); color: #fff; border-radius: 12px; padding: 9px 12px; font-weight: 800; font-size: 14px; }
+  .pant-cabecera small { display: block; font-weight: 400; opacity: .92; font-size: 11px; }
+  .huchas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .hucha { border-radius: 12px; padding: 9px 6px; color: #fff; text-align: center; }
+  .hucha .h-icono { font-size: 21px; }
+  .hucha .h-nombre { font-size: 12px; font-weight: 600; opacity: .95; }
+  .hucha .h-importe { font-size: 17px; font-weight: 800; }
+  .hucha.verde { background: #4CAF50; } .hucha.azul { background: #1E88E5; }
+  .hucha.naranja { background: #FB8C00; } .hucha.morado { background: #8E24AA; }
+  .temas-lista { display: flex; flex-direction: column; gap: 6px; }
+  .tema { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #E0E0E0; border-radius: 10px; padding: 7px 10px; font-size: 12.5px; font-weight: 600; color: #333; }
+  .tema .t-ico { font-size: 15px; }
+  .pant-nivel { align-self: flex-start; background: #E8F5E9; color: var(--verde-oscuro); border-radius: 999px; padding: 3px 10px; font-size: 10.5px; font-weight: 800; }
+  .pant-video { background: #000; border-radius: 10px; overflow: hidden; position: relative; }
+  .modulo-detalle .pant-video video { position: static; inset: auto; width: 100%; height: auto; display: block; }
+  .pant-sonido { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: #111; color: #fff; border: 0; border-radius: 999px; padding: 6px 12px; font-size: 11px; font-weight: 600; cursor: pointer; }
+  .pant-texto { font-size: 12px; color: #444; text-align: center; line-height: 1.45; }
+  .bolsa-saldo { background: #fff; border: 1.5px solid #E0E0E0; border-radius: 12px; text-align: center; padding: 12px; }
+  .bolsa-saldo .b-cifra { font-size: 23px; font-weight: 800; color: var(--verde-oscuro); }
+  .bolsa-saldo .b-etiqueta { font-size: 11px; color: #777; }
+  .bolsa-nav { margin-top: 0; flex-shrink: 0; display: flex; justify-content: space-around; background: #14264A; border-radius: 10px; padding: 8px 2px; }
+  .bolsa-nav div { color: #fff; font-size: 9.5px; text-align: center; }
+  .bolsa-nav div span { display: block; font-size: 14px; }
+
+  /* ---- Look EXACTO de la app (child_zone_page.dart / market_bolsa_inicio_page.dart / emprende_welcome_page.dart) ---- */
+  .mz-appbar { background: #FAFAFA; border-bottom: 1px solid #E5E5E5; padding: 5px 10px 4px; font-size: 12px; font-weight: 600; color: #212121; }
+  .mz-cab { display: flex; align-items: center; gap: 8px; margin: 5px 0 1px; }
+  .mz-ava { width: 30px; height: 30px; border-radius: 50%; background: rgba(76,175,80,0.15); display: flex; align-items: center; justify-content: center; font-size: 15px; }
+  .mz-holacol { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .mz-hola { font-size: 15px; font-weight: 800; color: #212121; }
+  .mz-nivel { background: rgba(33,150,243,0.2); color: #1976D2; border-radius: 12px; padding: 1px 8px; font-size: 9.5px; }
+  .mh-titulo { font-size: 13.5px; font-weight: 700; color: #212121; margin: 4px 0 6px; }
+  .hucha2 { border-radius: 12px; aspect-ratio: 1.35; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  .hucha2 .h-ico { font-size: 16px; line-height: 1; }
+  .hucha2 .h-nombre { font-size: 10.5px; font-weight: 700; }
+  .hucha2 .h-importe { font-size: 11.5px; font-weight: 800; }
+  .hucha2.verde .h-importe { color: #4CAF50; }
+  .hucha2.azul .h-importe { color: #2196F3; }
+  .hucha2.naranja .h-importe { color: #FF9800; }
+  .hucha2.morado .h-importe { color: #9C27B0; }
+  .hucha2.verde { background: rgba(76,175,80,0.1); } .hucha2.verde .h-ico, .hucha2.verde .h-nombre { color: #4CAF50; }
+  .hucha2.azul { background: rgba(33,150,243,0.1); } .hucha2.azul .h-ico, .hucha2.azul .h-nombre { color: #2196F3; }
+  .hucha2.naranja { background: rgba(255,152,0,0.1); } .hucha2.naranja .h-ico, .hucha2.naranja .h-nombre { color: #FF9800; }
+  .hucha2.morado { background: rgba(156,39,176,0.1); } .hucha2.morado .h-ico, .hucha2.morado .h-nombre { color: #9C27B0; }
+  .btn-transfer { background: #4CAF50; color: #fff; border: 0; border-radius: 12px; padding: 8px; font-size: 11.5px; font-weight: 700; text-align: center; margin-top: auto; }
+  .soy-card { margin-top: 8px; margin-bottom: 0; display: flex; align-items: center; gap: 8px; border-radius: 12px; padding: 8px 10px; background: rgba(76,175,80,0.1); border: 1.5px solid rgba(76,175,80,0.4); }
+  .soy-card .s-ico { font-size: 15px; }
+  .soy-card .s-texto { font-size: 12px; font-weight: 700; color: #4CAF50; }
+  .modulo-detalle .pant.pant-bls { background: #fff; }
+  .pant::after { content: '|||   O   <'; display: block; margin: 0 -10px -12px; flex-shrink: 0; text-align: center; word-spacing: 1.8em; letter-spacing: 1px; background: #ECEEF0; color: #3C4043; font-size: 13px; padding: 2px 10px 4px; border-top: 1px solid #3C4043; }
+  .phone-notch { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 13px; height: 13px; border-radius: 50%; background: #000; border: 2px solid #23262b; z-index: 6; box-shadow: inset 0 0 3px #3a3f46; }
+  .bls-cuerpo { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+  .aca-fila2 { display: flex; gap: 6px; margin-top: 10px; flex-shrink: 0; }
+  .aca-mi { flex: 1; border: 1.5px solid #000; border-radius: 10px; height: 40px; padding: 5px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center; font-size: 9.5px; font-weight: 700; color: #212121; box-shadow: 0 1px 3px rgba(0,0,0,0.08); line-height: 1.1; } /* 20-11-26 noche: más alta (40px) para que el texto NO toque la línea negra de abajo (petición Mónica) */
+  .aca-mi .mi-ico { display: block; font-size: 14px; margin-bottom: 2px; }
+  .aca-mi.perfil { background: rgba(76,175,80,0.1); color: #4CAF50; }
+  .aca-mi.colegio { background: rgba(33,150,243,0.1); color: #2196F3; }
+  .aca-fam { margin-top: -5px; margin-bottom: 0; background: rgba(156,39,176,0.1); border: 1.5px solid #000; border-radius: 10px; height: 36px; padding: 5px 4px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 10px; font-weight: 700; color: #9C27B0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); flex-shrink: 0; } /* 20-11-26 noche: pegada abajo y CASI JUNTO a Mi perfil/Mi colegio (hueco real ~3px, petición Mónica) */
+  .aca-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 4px; flex: 1; min-height: 0; overflow: hidden; grid-auto-rows: 1fr; }
+  .aca-card { border-radius: 10px; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .aca-card .a-ico { font-size: 15px; }
+  .aca-card .a-nombre { font-size: 10px; font-weight: 700; }
+  .aca-card .a-sub { font-size: 8px; }
+  .aca-fila { display: flex; gap: 4px; justify-content: center; margin-top: 8px; flex-wrap: wrap; }
+  .aca-curso { border-radius: 999px; padding: 2px 8px; font-size: 9px; font-weight: 700; background: rgba(33,150,243,0.12); color: #1976D2; }
+  .aca-curso.on { background: #2196F3; color: #fff; }
+  .bls-app { background: #14264A; color: #fff; font-weight: 800; padding: 6px 10px; font-size: 12px; }
+  .bls-card { background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 9px 10px; }
+  .bls-lab { font-size: 8.5px; font-weight: 700; color: #667085; letter-spacing: 0.5px; }
+  .bls-val { font-size: 16.5px; font-weight: 800; color: #101828; }
+  .bls-fila { display: flex; gap: 6px; margin-top: 6px; }
+  .bls-col { flex: 1; }
+  .bls-lab2 { font-size: 8.5px; color: #667085; }
+  .bls-val2 { font-size: 11px; font-weight: 800; color: #101828; }
+  .bls-div { border-top: 1px solid #E2E8F0; margin: 7px 0; }
+  .bls-chipfila { display: flex; align-items: center; gap: 5px; }
+  .bls-chip { background: rgba(152,162,179,0.15); color: #98A2B3; border-radius: 999px; padding: 1px 6px; font-size: 8.5px; font-weight: 700; }
+  .bls-resp { font-size: 8.5px; color: #667085; }
+  .bls-tit { font-size: 10.5px; font-weight: 700; color: #101828; }
+  .bls-sub { font-size: 9px; color: #667085; }
+  .btn-explorar { border: 1px solid #E2E8F0; border-radius: 10px; padding: 7px; text-align: center; font-size: 10.5px; font-weight: 700; color: #101828; background: #fff; }
+  .bls-fila-tit { display: flex; justify-content: space-between; align-items: center; }
+  .bls-vertodas { font-size: 9px; font-weight: 700; color: #2196F3; }
+  .bls-noticia { border-top: 1px solid #E2E8F0; padding: 6px 0 0; margin-top: 6px; }
+  .bls-emp { font-size: 8px; font-weight: 700; color: #667085; letter-spacing: 0.5px; }
+  .bls-titu { font-size: 9.5px; color: #101828; }
+  .bolsa-nav div { color: #fff; opacity: 0.85; }
+  .modulo-detalle .pant.pant-emp { background: #9C27B0; }
+  .pant-emp .e-head { color: rgba(255,255,255,0.7); text-align: center; font-size: 11px; font-weight: 700; }
+  .pant-emp .pant-video { margin-top: 8px; margin-bottom: 8px; }
+  .emp-card { background: #fff; border-radius: 10px; padding: 10px; text-align: center; color: #212121; font-size: 11px; font-weight: 800; line-height: 1.35; }
+  .emp-card .r-heading { color: #7B1FA2; font-size: 12.5px; font-weight: 800; }
+  .emp-card .r-tienda { font-size: 30px; line-height: 1.2; }
+  .emp-card .r-texto { color: #666; font-size: 9.5px; font-weight: 400; line-height: 1.3; }
+  .btn-comenzar { background: #4CAF50; color: #fff; border-radius: 10px; padding: 9px; font-size: 12px; font-weight: 800; text-align: center; margin-top: auto; }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <nav class="nav">
+    <a class="logo" href="#inicio">
+      <span class="logo-icon"><img src="img/logo-header.png" alt="Logo AFEC1"></span>
+      AFEC1
+    </a>
+    <input type="checkbox" id="menu-toggle">
+    <label class="menu-btn" for="menu-toggle">☰</label>
+    <div class="nav-links">
+      <a href="#que-es">La app</a>
+      <a href="#familias">Familias</a>
+      <a href="#colegios">Colegios</a>
+      <a href="#seguridad">Seguridad</a>
+      <a class="nav-cta" href="app/">Usar la app</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="inicio">
+  <div class="hero-inner">
+    <div>
+      <div class="moneda-wrap">
+        <video class="moneda-hero" src="video/moneda_buckle.mp4" poster="video/moneda_poster.jpg" preload="metadata" playsinline
+               aria-label="Moneda AFEC: pulsa el play para verla y oírla una vez"></video>
+      </div>
+      <span class="badge">Educación financiera para niños y adolescentes</span>
+      <h1>Aprende, ahorra, <span>decide, invierte.</span></h1>
+      <p class="sub">
+        AFEC1 enseña a los más pequeños a gestionar su paga y sus ahorros como en la vida real:
+        huchas, paga, retos de emprendimiento, bolsa simulada y cursos.
+        Sin anuncios, sin publicidad y con los padres siempre al mando.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="app/">📱 Usar la app ahora</a>
+        <a class="btn btn-outline" href="#colegios">Para colegios</a>
+      </div>
+    </div>
+
+    <!-- Teléfono (vertical) mostrando la LECCIÓN REAL tal cual se ve en la app:
+         título + paso + vídeo (sonido al tocar) + nota + botón SIGUIENTE -->
+    <div class="phone">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="leccion">
+          <div class="leccion-titulo">¿Qué es el dinero?</div>
+          <div class="leccion-paso">Paso 1 de 7</div>
+          <div class="leccion-pasobar"></div>
+          <div class="leccion-etiqueta">Vídeo de la lección</div>
+          <div class="leccion-video">
+            <video id="leccionVideo" src="video/leccion_1_dinero_basico.mp4" poster="video/leccion_poster.jpg" preload="metadata" playsinline
+                   aria-label="Vídeo real de la lección 1 de Dinero, nivel Básico"></video>
+          </div>
+          <div class="leccion-nota">Mira el vídeo con atención y pulsa "Siguiente" para continuar.</div>
+          <button class="leccion-boton" type="button">Siguiente</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUE ES ================= -->
+<section id="que-es">
+  <div class="container">
+    <div class="kicker reveal">La app</div>
+    <h2 class="reveal">Un sistema financiero completo, hecho a su medida</h2>
+    <p class="lead reveal">
+      AFEC1 no es un juego: cada hucha, cada ingreso y cada reto funciona como en la vida real,
+      pero acompañado. Los menores aprenden decidiendo; los padres y profesores acompañan
+      con paneles propios, sin entrometerse.
+    </p>
+    <div class="modulos">
+      <div class="modulo reveal" data-detalle="familia" title="Toca para ver la pantalla real">
+        <div class="mi">🏦</div>
+        <h3 class="c-verde">Mi Familia y huchas</h3>
+        <p>Paga, ingresos con reparto en 4 huchas (ahorro, inversión, ocio y donaciones) y objetivos de ahorro. El dinero se mueve como en casa.</p>
+        <div style="margin-top:12px; font-size:0.85rem; font-weight:700; color:var(--verde-oscuro);">Ver pantalla real →</div>
+      </div>
+      <div class="modulo azul reveal" data-detalle="academia" title="Toca para ver la pantalla real">
+        <div class="mi">🎓</div>
+        <h3 class="c-azul">Academia</h3>
+        <p>Cursos por edades con lecciones cortas y evaluación. El nivel se adapta al curso escolar, no solo a la edad.</p>
+        <div style="margin-top:12px; font-size:0.85rem; font-weight:700; color:var(--verde-oscuro);">Ver pantalla real →</div>
+      </div>
+      <div class="modulo naranja reveal" data-detalle="emprende" title="Toca para ver la pantalla real">
+        <div class="mi">💡</div>
+        <h3 class="c-naranja">Emprende</h3>
+        <p>Retos de emprendimiento guiados paso a paso: idea, costes, precio y beneficio. Del papel al mundo real.</p>
+        <div style="margin-top:12px; font-size:0.85rem; font-weight:700; color:var(--verde-oscuro);">Ver pantalla real →</div>
+      </div>
+      <div class="modulo morado reveal" data-detalle="market" title="Toca para ver la pantalla real">
+        <div class="mi">📈</div>
+        <h3 class="c-morado">Market y bolsa</h3>
+        <p>Bolsa simulada con cartera, órdenes e historial. Aprenden a invertir sin arriesgar un solo euro.</p>
+        <div style="margin-top:12px; font-size:0.85rem; font-weight:700; color:var(--verde-oscuro);">Ver pantalla real →</div>
+      </div>
+    </div>
+
+    <!-- Pantalla real de cada módulo, dentro de un móvil (se abre al tocar la tarjeta) -->
+    <div class="modulo-detalle" id="detalle-familia">
+      <div class="modulo-rotulo">MI FAMILIA Y HUCHAS · LA ZONA DEL MENOR</div>
+      <div class="phone"><div class="phone-notch"></div><div class="phone-screen">
+        <div class="pant">
+          <div class="mz-appbar">Mi Zona</div>
+          <div class="mz-cab"><div class="mz-ava">👧</div><div class="mz-holacol"><div class="mz-hola">¡Hola Sofía!</div><div class="mz-nivel">Intermedio</div></div></div>
+          <div class="mh-titulo">Mis huchas</div>
+          <div class="huchas-grid">
+            <div class="hucha2 verde"><div class="h-ico">🐷</div><div class="h-nombre">Ahorro</div><div class="h-importe">65,00 €</div></div>
+            <div class="hucha2 azul"><div class="h-ico">📈</div><div class="h-nombre">Inversión</div><div class="h-importe">23,00 €</div></div>
+            <div class="hucha2 naranja"><div class="h-ico">🎉</div><div class="h-nombre">Ocio</div><div class="h-importe">45,00 €</div></div>
+            <div class="hucha2 morado"><div class="h-ico">🤝</div><div class="h-nombre">Donaciones</div><div class="h-importe">18,00 €</div></div>
+          </div>
+          <div class="btn-transfer">⇄ Hacer transferencia</div>
+          <div class="soy-card"><div class="s-ico">💰</div><div class="s-texto">Soy ahorrador</div></div>
+        </div>
+      </div></div>
+    </div>
+    <div class="modulo-detalle" id="detalle-academia">
+      <div class="modulo-rotulo">ACADEMIA · LECCIONES POR EDADES</div>
+      <div class="phone"><div class="phone-notch"></div><div class="phone-screen">
+        <div class="pant">
+          <div class="pant-cabecera">Academia <small>Elige un tema y empieza a aprender</small></div>
+          <div class="aca-grid">
+            <div class="aca-card" style="background: rgba(76,175,80,0.1);"><div class="a-ico">💰</div><div class="a-nombre" style="color:#4CAF50;">Dinero</div><div class="a-sub" style="color:#667085;">10 lecciones</div></div>
+            <div class="aca-card" style="background: rgba(33,150,243,0.1);"><div class="a-ico">🐷</div><div class="a-nombre" style="color:#2196F3;">Ahorro</div><div class="a-sub" style="color:#667085;">10 lecciones</div></div>
+            <div class="aca-card" style="background: rgba(255,152,0,0.1);"><div class="a-ico">📈</div><div class="a-nombre" style="color:#FF9800;">Inversión</div><div class="a-sub" style="color:#667085;">10 lecciones</div></div>
+            <div class="aca-card" style="background: rgba(156,39,176,0.1);"><div class="a-ico">🛒</div><div class="a-nombre" style="color:#9C27B0;">Gastos</div><div class="a-sub" style="color:#667085;">10 lecciones</div></div>
+            <div class="aca-card" style="background: rgba(0,150,136,0.1);"><div class="a-ico">🎯</div><div class="a-nombre" style="color:#009688;">Objetivos</div><div class="a-sub" style="color:#667085;">10 lecciones</div></div>
+            <div class="aca-card" style="background: rgba(158,158,158,0.1);"><div class="a-ico">🌍</div><div class="a-nombre" style="color:#616161;">Economía</div><div class="a-sub" style="color:#667085;">10 lecciones</div></div>
+          </div>
+          <div class="aca-fila2"><div class="aca-mi perfil"><span class="mi-ico">👤</span>Mi perfil</div><div class="aca-mi colegio"><span class="mi-ico">🏫</span>Mi colegio</div></div>
+          <div class="aca-fam">👨‍👩‍👧 Mi familia</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="modulo-detalle" id="detalle-emprende">
+      <div class="modulo-rotulo">EMPRENDE · AL DAR A «EMPEZAR LA AVENTURA»</div>
+      <div class="phone"><div class="phone-notch"></div><div class="phone-screen">
+        <div class="pant pant-emp">
+          <div class="e-head">Vamos a ayudarla</div>
+          <div class="pant-video">
+            <video id="videoEmprende" src="video/valeria_presentacion.mp4" poster="video/valeria_poster.jpg" preload="metadata" playsinline
+                   aria-label="Vídeo de Valería presentando su aventura de Emprende"></video>
+          </div>
+          <div class="emp-card">Valería convierte su afición en una marca de pulseras personalizadas.</div>
+          <div class="emp-card">
+            <div class="r-heading">Hago que funcione.</div>
+            <div class="r-tienda">🏪</div>
+            <div class="r-texto">Coste material: 2,50 € · Precio venta: 6,00 € · Beneficio: +3,50 €</div>
+          </div>
+          <div class="btn-comenzar">▶ ¡Comenzar!</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="modulo-detalle" id="detalle-market">
+      <div class="modulo-rotulo">MARKET Y BOLSA · PANTALLA INICIAL DE AFEC BOLSA</div>
+      <div class="phone"><div class="phone-notch"></div><div class="phone-screen">
+        <div class="pant pant-bls">
+          <div class="bls-app">AFEC Bolsa</div>
+          <div class="bls-cuerpo">
+          <div class="bls-card">
+            <div class="bls-lab">PATRIMONIO TOTAL</div>
+            <div class="bls-val">1.000,00 AFEC Coins</div>
+            <div class="bls-fila">
+              <div class="bls-col"><div class="bls-lab2">Saldo disponible</div><div class="bls-val2">1.000,00 Coins</div></div>
+              <div class="bls-col"><div class="bls-lab2">Valor de tus inversiones</div><div class="bls-val2">0,00 Coins</div></div>
+            </div>
+            <div class="bls-div"></div>
+            <div class="bls-chipfila"><div class="bls-chip">0,00%</div><div class="bls-resp">Respecto a los 1.000 Coins iniciales</div></div>
+          </div>
+          <div class="bls-card"><div class="bls-tit">Evolución del patrimonio</div><div class="bls-sub">Cuando compres acciones verás aquí cómo evoluciona tu dinero con los precios de cada jornada.</div></div>
+          <div class="bls-card"><div class="bls-tit">Mis empresas</div><div class="bls-sub">Todavía no inviertes en ninguna empresa.</div></div>
+          <div class="btn-explorar">🏪 Explorar mercado</div>
+          <div class="bls-card">
+            <div class="bls-fila-tit"><div class="bls-tit">Últimas noticias</div><div class="bls-vertodas">Ver todas</div></div>
+            <div class="bls-sub" style="margin-top:4px;">Jornada tranquila: las cinco empresas del Mark...</div>
+            <div class="bls-noticia"><div class="bls-emp">VIDEOJUEGOS PEPE</div><div class="bls-titu">Llena el 90 % de sus asientos en verano: su m...</div></div>
+            <div class="bls-noticia"><div class="bls-emp">AEROLÍNEAS NORTE</div><div class="bls-titu">Los viajes de fin de curso</div></div>
+          </div>
+          </div>
+          <div class="bolsa-nav">
+            <div><span>⌂</span>INICIO</div>
+            <div><span>▤</span>MERCADO</div>
+            <div><span>▣</span>CARTERA</div>
+            <div><span>✎</span>NOTICIAS</div>
+            <div><span>✦</span>ACTIVIDAD</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAMILIAS / COLEGIOS ================= -->
+<section id="familias" style="background: #E8F5E9;">
+  <div class="container">
+    <div class="kicker reveal">Dos mundos, una app</div>
+    <h2 class="reveal">Pensada para familias y para colegios</h2>
+    <p class="lead reveal">Cada figura ve solo lo que le corresponde: los padres gestionan el dinero familiar; los profesores siguen el aprendizaje escolar.</p>
+    <div class="publicos">
+      <div class="publico reveal">
+        <h3>👨‍👩‍👧 Para familias</h3>
+        <ul>
+          <li>Creas perfiles financieros para tus hijos en un minuto</li>
+          <li>Configuras la paga y el reparto automático entre huchas</li>
+          <li>Retos y rachas que motivan el ahorro semanal</li>
+          <li>Tu PIN familiar protege la zona de adultos</li>
+          <li>Sin anuncios y sin compras dentro de la app</li>
+        </ul>
+      </div>
+      <div class="publico reveal" id="colegios">
+        <h3>🏫 Para colegios</h3>
+        <ul>
+          <li>Panel del profesor con seguimiento del progreso académico</li>
+          <li>Vinculación escolar: clases y grupos sin exponer datos familiares</li>
+          <li>La economía de cada casa nunca sale de la familia</li>
+          <li>Ideal para el área de economía y competencias financieras</li>
+          <li>Funciona en las aulas con tablets o en el navegador</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COMO FUNCIONA ================= -->
+<section id="como">
+  <div class="container">
+    <div class="kicker reveal">Cómo funciona</div>
+    <h2 class="reveal">Empezar tarda menos que hacer una lista de la compra</h2>
+    <p class="lead reveal">Tres pasos y el pequeño ya está aprendiendo.</p>
+    <div class="pasos">
+      <div class="paso reveal">
+        <h4>Abre la app</h4>
+        <p>En el navegador o en el móvil, sin instalar nada. Elige el perfil del menor y entra en su zona.</p>
+      </div>
+      <div class="paso reveal">
+        <h4>Configura la paga</h4>
+        <p>Decide cuánto y cada cuánto. El reparto entre huchas es automático o a tu gusto.</p>
+      </div>
+      <div class="paso reveal">
+        <h4>Aprender haciendo</h4>
+        <p>Cursos, retos y la bolsa simulada convierten cada semana en una lección práctica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEGURIDAD ================= -->
+<section id="seguridad" style="background: #E8F5E9;">
+  <div class="container">
+    <div class="kicker reveal">Seguridad</div>
+    <h2 class="reveal">Sin cuentas bancarias ni pagos dentro de la app</h2>
+    <p class="lead reveal">AFEC1 es un entorno de aprendizaje 100% simulado.</p>
+    <div class="seguridad reveal">
+      <div class="candado">🔒</div>
+      <div>
+        <ul class="publico" style="list-style:none; padding:0;">
+          <li style="border:none; padding-left:30px; position:relative;">
+            <span style="position:absolute; left:0; color:var(--verde); font-weight:700;">✓</span>
+            Zona de adultos protegida con PIN familiar, separada de la zona del menor
+          </li>
+          <li style="border:none; padding-left:30px; position:relative;">
+            <span style="position:absolute; left:0; color:var(--verde); font-weight:700;">✓</span>
+            Sin pagos reales: la bolsa y el mercado son simulaciones educativas
+          </li>
+          <li style="border:none; padding-left:30px; position:relative;">
+            <span style="position:absolute; left:0; color:var(--verde); font-weight:700;">✓</span>
+            Sin publicidad ni ventas dentro de la app
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section id="contacto">
+  <div class="container">
+    <div class="cta-final reveal">
+      <h2>¿Empezamos?</h2>
+      <p>Abre AFEC1 ahora en tu navegador y descubre la educación financiera que tus hijos recuerdan para siempre.</p>
+      <a class="btn" href="app/">📱 Usar la app ahora</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="footer-inner">
+    <div>🌱 <strong>AFEC1</strong> — Aprende, ahorra, decide, invierte.</div>
+    <div>
+      <a href="app/">La app</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="condiciones.html">Condiciones</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+      <a href="eliminar-datos.html">Eliminar datos</a>
+      <a href="mailto:monlopsal@gmail.com">Contacto</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Aparición suave al hacer scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // VÍDEOS (petición Mónica 20-11-26 noche): nada se reproduce solo.
+  // Cada vídeo se ve congelado (su imagen fija) con un botón ▶.
+  // Al tocar el ▶ se ve y se OYE una sola vez; al terminar se para y vuelve el ▶.
+  // Si quiere volver a verlo: pulsa el ▶ de nuevo. Sin bucle.
+  function prepararVideo(v, wrap) {
+    if (!v || !wrap) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'btn-play';
+    btn.setAttribute('aria-label', 'Ver y oír el vídeo');
+    btn.textContent = '▶';
+    wrap.appendChild(btn);
+    function tocar() {
+      if (v.paused || v.ended) {
+        if (v.ended) { try { v.currentTime = 0; } catch (e) {} }
+        v.muted = false;
+        v.volume = 1;
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      } else {
+        v.pause();
+      }
+    }
+    btn.addEventListener('click', function (e) { e.stopPropagation(); tocar(); });
+    v.addEventListener('click', tocar);
+    v.addEventListener('play', function () { wrap.classList.add('reproduciendo'); });
+    v.addEventListener('pause', function () { wrap.classList.remove('reproduciendo'); });
+    v.addEventListener('ended', function () { wrap.classList.remove('reproduciendo'); });
+  }
+  prepararVideo(document.querySelector('.moneda-hero'), document.querySelector('.moneda-wrap'));
+  prepararVideo(document.getElementById('leccionVideo'), document.querySelector('.leccion-video'));
+  prepararVideo(document.getElementById('videoEmprende'), document.querySelector('.pant-video'));
+
+  // Detalle de módulos (#que-es): tocar una tarjeta muestra su pantalla real
+  // en un MÓVIL FLOTANTE en mitad de la pantalla (petición Mónica 20-11-26 noche).
+  // Se cierra con la cruz ✕, tocando fuera del móvil o con la tecla Escape.
+  (function () {
+    var mapa = { familia: 'detalle-familia', academia: 'detalle-academia', emprende: 'detalle-emprende', market: 'detalle-market' };
+    function cierraTodo() {
+      document.querySelectorAll('.modulo-detalle.abierto').forEach(function (d) {
+        d.classList.remove('abierto');
+        var v = d.querySelector('video');
+        if (v && !v.paused) v.pause();
+      });
+      document.querySelectorAll('#que-es .modulo.activa').forEach(function (m) { m.classList.remove('activa'); });
+      document.body.style.overflow = '';
+    }
+    // A cada ventana le añado su cruz de cerrar y el «tocar fuera cierra»
+    document.querySelectorAll('.modulo-detalle').forEach(function (d) {
+      var x = document.createElement('button');
+      x.type = 'button';
+      x.className = 'modulo-cerrar';
+      x.textContent = '✕';
+      x.setAttribute('aria-label', 'Cerrar');
+      x.addEventListener('click', function (e) { e.stopPropagation(); cierraTodo(); });
+      d.appendChild(x);
+      d.addEventListener('click', function (e) { if (e.target === d) cierraTodo(); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cierraTodo(); });
+    document.querySelectorAll('#que-es .modulo[data-detalle]').forEach(function (m) {
+      m.addEventListener('click', function () {
+        var d = document.getElementById(mapa[m.getAttribute('data-detalle')]);
+        if (!d) return;
+        var yaEstaba = d.classList.contains('abierto');
+        cierraTodo();
+        if (!yaEstaba) {
+          d.classList.add('abierto');
+          m.classList.add('activa');
+          document.body.style.overflow = 'hidden';
+          d.scrollTop = 0;
+        }
+      });
+    });
+    var clave = (location.hash || '').replace('#modulo-', '');
+    if (mapa[clave]) {
+      var d = document.getElementById(mapa[clave]);
+      if (d) { d.classList.add('abierto'); document.body.style.overflow = 'hidden'; }
+      var t = document.querySelector('#que-es .modulo[data-detalle="' + clave + '"]');
+      if (t) t.classList.add('activa');
+    }
+  })();
+</script>
+
+</body>
+</html>

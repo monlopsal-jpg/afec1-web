@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de Privacidad · AFEC1</title>
+<style>
+  :root { --verde: #4CAF50; --verde-oscuro: #2E7D32; --verde-footer: #1B5E20; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Roboto, 'Segoe UI', system-ui, -apple-system, sans-serif; color: #263238; background: #fff; line-height: 1.65; }
+  header { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #E8F5E9; z-index: 50; }
+  .nav { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+  .logo { font-weight: 800; font-size: 18px; color: var(--verde-oscuro); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .volver { color: var(--verde-oscuro); text-decoration: none; font-weight: 700; font-size: 14px; background: #E8F5E9; padding: 8px 14px; border-radius: 999px; }
+  .hero { background: linear-gradient(135deg, var(--verde) 0%, var(--verde-oscuro) 100%); color: #fff; padding: 34px 20px; text-align: center; }
+  .hero h1 { font-size: 26px; }
+  .hero p { opacity: 0.92; margin-top: 6px; font-size: 14px; }
+  main { max-width: 860px; margin: 0 auto; padding: 36px 20px; }
+  .datos { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 14px; padding: 16px 20px; font-size: 15px; }
+  .fecha { color: #90A4AE; font-size: 13px; margin-top: 10px; }
+  h2 { color: var(--verde-oscuro); font-size: 19px; margin: 30px 0 10px; }
+  main p, main li { font-size: 15px; color: #37474F; }
+  main ul { padding-left: 20px; margin: 8px 0 14px; }
+  main li { margin-bottom: 6px; }
+  .mini { background: #F1F8E9; border: 1px solid #DCEDC8; border-radius: 14px; padding: 16px 20px; margin: 18px 0; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  th, td { border: 1px solid #C8E6C9; padding: 9px 12px; font-size: 14.5px; text-align: left; vertical-align: top; }
+  th { background: #E8F5E9; color: var(--verde-oscuro); }
+  footer { background: var(--verde-footer); color: rgba(255,255,255,0.85); padding: 40px 20px; margin-top: 48px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer a { color: rgba(255,255,255,0.85); text-decoration: none; margin-left: 22px; }
+  footer a:hover { color: #fff; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; } footer a { margin: 6px 12px 0 0; } }
+</style>
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html"><span>🌱</span> AFEC1</a>
+    <a class="volver" href="index.html">← Volver a la página principal</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Política de Privacidad</h1>
+  <p>AFEC1 · Educación financiera para menores, diseñada para protegerlos.</p>
+</div>
+
+<main>
+  <div class="datos">
+    <strong>Titular:</strong> Mónica López Salcedo<br>
+    <strong>NIF:</strong> 02.915.096F<br>
+    <strong>Domicilio:</strong> 28300 Aranjuez (Madrid), España<br>
+    <strong>Email de contacto:</strong> monlopsal@gmail.com
+  </div>
+  <p class="fecha">Fecha: 21 de noviembre de 2026</p>
+
+  <h2>1. Responsable del tratamiento</h2>
+  <p>La presente Política de Privacidad se aplica a la aplicación AFEC1 y a su página web. El responsable es <strong>Mónica López Salcedo</strong> (NIF 02.915.096F), con domicilio en 28300 Aranjuez (Madrid), España. Para cualquier cuestión sobre privacidad puedes escribir a <strong>monlopsal@gmail.com</strong>.</p>
+
+  <h2>2. Principio básico: tus datos viven en tu móvil (local-first)</h2>
+  <p>AFEC1 está construida con una arquitectura <em>local-first</em>: casi toda la información de los menores (huchas, paga, movimientos, retos, progreso de los cursos y objetivos de ahorro) se guarda <strong>en el propio dispositivo de la familia</strong>, usando el almacenamiento técnico del navegador o de la app (localStorage e IndexedDB). Esa información no se envía a ningún servidor salvo cuando la familia activa voluntariamente la sincronización.</p>
+
+  <h2>3. Sesiones anónimas en la nube (servidores en la UE)</h2>
+  <p>Cuando una familia activa la sincronización entre dispositivos, AFEC1 utiliza <strong>sesiones anónimas</strong> alojadas en Supabase, cuyos servidores se encuentran <strong>en la Unión Europea</strong>. Esto significa:</p>
+  <ul>
+    <li>No se crean cuentas con email, teléfono ni redes sociales del menor: solo se generan <strong>identificadores técnicos aleatorios</strong> que no permiten identificar a una persona.</li>
+    <li>Los datos viajan siempre cifrados (conexión HTTPS).</li>
+    <li>No se cruza esa información con otras fuentes ni se utiliza para perfilado publicitario.</li>
+  </ul>
+
+  <h2>4. Minimización de datos: lo que nunca pedimos</h2>
+  <p>Aplicamos el principio de minimización del RGPD. <strong>Nunca solicitamos ni almacenamos</strong> del menor:</p>
+  <ul>
+    <li>Email o teléfono.</li>
+    <li>Dirección o ubicación (no usamos GPS).</li>
+    <li>Fotografías, documentos o datos bancarios del menor.</li>
+    <li>Apellidos ni documentos de identidad del menor (solo un nombre o alias para mostrar en pantalla).</li>
+  </ul>
+
+  <h2>5. Consentimiento parental (menores de 14 años)</h2>
+  <p>Conforme a la LO 3/2018 (LOPDGDD), el tratamiento de datos de menores de 14 años exige el consentimiento de sus padres o tutores. Por eso <strong>las cuentas de los menores siempre las crea y supervisa un adulto</strong> desde la Zona de la Familia, protegida con contraseña. Es el adulto quien da el consentimiento y quien puede revisar o borrar los datos en cualquier momento.</p>
+
+  <h2>6. Colegios y profesores: separación por diseño</h2>
+  <p>Los centros escolares y profesores que usen AFEC1 en clase solo acceden a una capa escolar independiente: <strong>ven el progreso académico de Academia</strong> (cursos, lecciones y evaluación) <strong>y nunca las huchas, la paga ni las finanzas familiares</strong> del menor. Esa separación está integrada en el diseño de la aplicación, no es una promesa añadida.</p>
+
+  <h2>7. Cero publicidad y cero rastreo</h2>
+  <p>AFEC1 <strong>no incluye publicidad, ni cookies publicitarias, ni SDK de analítica o rastreo</strong> de terceros. No se venden, ceden ni comparten datos con terceros con fines comerciales. No existe perfilado comercial de menores.</p>
+
+  <h2>8. Tus derechos</h2>
+  <p>Como responsable del tratamiento, garantizamos los derechos reconocidos por el RGPD: <strong>acceso, rectificación, supresión, limitación, oposición y portabilidad</strong>. Puedes ejercerlos escribiendo a <strong>monlopsal@gmail.com</strong>. Además, la eliminación directa de perfiles y datos puede hacerse en tiempo real desde la propia app (ver <a href="eliminar-datos.html">Eliminar datos</a>). También puedes reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
+
+  <h2>9. Seguridad</h2>
+  <p>El acceso a la Zona de la Familia está protegido con contraseña y las copias sincronizadas viajan cifradas y residen en la UE. Aplicamos medidas técnicas y organizativas adecuadas a la naturaleza de los datos tratados.</p>
+
+  <div class="mini">
+    <h2 style="margin-top:0;">En corto: resumen para menores de 8 a 17 años</h2>
+    <table>
+      <tr><th>Pregunta</th><th>Respuesta</th></tr>
+      <tr><td>¿Qué guardamos?</td><td>Tus huchas, tu paga, tus retos y tus cursos. Casi todo se queda <strong>en tu móvil</strong>.</td></tr>
+      <tr><td>¿Qué NO te pedimos?</td><td>Tu email, tu teléfono, dónde vives ni dónde estás. Eso no nos hace falta.</td></tr>
+      <tr><td>¿Quién puede verlo?</td><td>Tú y tu familia. Tus papás están al mando. Tu profe solo ve cómo vas en <strong>Academia</strong>, nunca tus huchas.</td></tr>
+      <tr><td>¿Qué viaja por internet?</td><td>Solo una versión <strong>anónima</strong> de tus datos, a servidores que están en Europa.</td></tr>
+      <tr><td>¿Hay anuncios?</td><td>No. Ni anuncios ni espías que sigan lo que haces.</td></tr>
+      <tr><td>¿Y si quiero borrarlo todo?</td><td>Se lo dices a tu familia: se borra al momento desde la app, o nos escribes y lo borramos.</td></tr>
+    </table>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>🌱 <strong>AFEC1</strong> — Aprende, ahorra, decide, invierte.</div>
+    <div>
+      <a href="app/">La app</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="condiciones.html">Condiciones</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+      <a href="eliminar-datos.html">Eliminar datos</a>
+      <a href="mailto:monlopsal@gmail.com">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

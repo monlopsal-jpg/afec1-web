@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eliminar datos · AFEC1</title>
+<style>
+  :root { --verde: #4CAF50; --verde-oscuro: #2E7D32; --verde-footer: #1B5E20; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Roboto, 'Segoe UI', system-ui, -apple-system, sans-serif; color: #263238; background: #fff; line-height: 1.65; }
+  header { position: sticky; top: 0; background: #fff; border-bottom: 1px solid #E8F5E9; z-index: 50; }
+  .nav { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; }
+  .logo { font-weight: 800; font-size: 18px; color: var(--verde-oscuro); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .volver { color: var(--verde-oscuro); text-decoration: none; font-weight: 700; font-size: 14px; background: #E8F5E9; padding: 8px 14px; border-radius: 999px; }
+  .hero { background: linear-gradient(135deg, var(--verde) 0%, var(--verde-oscuro) 100%); color: #fff; padding: 34px 20px; text-align: center; }
+  .hero h1 { font-size: 26px; }
+  .hero p { opacity: 0.92; margin-top: 6px; font-size: 14px; }
+  main { max-width: 860px; margin: 0 auto; padding: 36px 20px; }
+  .datos { background: #E8F5E9; border: 1px solid #C8E6C9; border-radius: 14px; padding: 16px 20px; font-size: 15px; }
+  .fecha { color: #90A4AE; font-size: 13px; margin-top: 10px; }
+  h2 { color: var(--verde-oscuro); font-size: 19px; margin: 30px 0 10px; }
+  main p, main li { font-size: 15px; color: #37474F; }
+  main ul, main ol { padding-left: 20px; margin: 8px 0 14px; }
+  main li { margin-bottom: 6px; }
+  .mini { background: #F1F8E9; border: 1px solid #DCEDC8; border-radius: 14px; padding: 16px 20px; margin: 18px 0; }
+  .paso { background: #F1F8E9; border: 1px solid #DCEDC8; border-radius: 14px; padding: 16px 20px; margin: 14px 0; }
+  .paso h3 { color: var(--verde-oscuro); font-size: 16px; margin-bottom: 6px; }
+  footer { background: var(--verde-footer); color: rgba(255,255,255,0.85); padding: 40px 20px; margin-top: 48px; }
+  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer a { color: rgba(255,255,255,0.85); text-decoration: none; margin-left: 22px; }
+  footer a:hover { color: #fff; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; } footer a { margin: 6px 12px 0 0; } }
+</style>
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html"><span>🌱</span> AFEC1</a>
+    <a class="volver" href="index.html">← Volver a la página principal</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>Eliminar datos y perfiles</h1>
+  <p>AFEC1 · Tú decides qué se guarda y cuándo se borra.</p>
+</div>
+
+<main>
+  <div class="datos">
+    <strong>Titular:</strong> Mónica López Salcedo<br>
+    <strong>NIF:</strong> 02.915.096F<br>
+    <strong>Domicilio:</strong> 28300 Aranjuez (Madrid), España<br>
+    <strong>Email de contacto:</strong> monlopsal@gmail.com
+  </div>
+  <p class="fecha">Fecha: 21 de noviembre de 2026</p>
+
+  <p style="margin-top:18px;">Esta página explica cómo eliminar los perfiles de menores y todos los datos asociados en AFEC1. Hay <strong>dos formas</strong>: hacerlo tú mismo desde la aplicación, al instante, o solicitarlo por correo electrónico.</p>
+
+  <div class="paso">
+    <h3>Opción 1 · Desde la app (borrado en tiempo real)</h3>
+    <ol>
+      <li>Abre AFEC1 y entra en la <strong>Zona de la Familia</strong> (con tu contraseña de adulto).</li>
+      <li>Selecciona el perfil del menor que quieras eliminar.</li>
+      <li>Pulsa <strong>«Eliminar perfil»</strong> y confirma.</li>
+    </ol>
+    <p>El borrado es <strong>inmediato</strong>: desaparece el perfil y sus datos del dispositivo y, si la familia tenía activada la sincronización, también se eliminan en ese momento los datos guardados en la nube (sesiones anónimas en servidores de la UE).</p>
+  </div>
+
+  <div class="paso">
+    <h3>Opción 2 · Por correo electrónico</h3>
+    <ol>
+      <li>Escribe a <strong>monlopsal@gmail.com</strong> con el asunto «Eliminar datos».</li>
+      <li>Indica el nombre o alias del perfil y, si lo sabes, el dispositivo o centro escolar asociado.</li>
+      <li>Te confirmaremos por email la eliminación en un <strong>plazo máximo de 7 días hábiles</strong>.</li>
+    </ol>
+    <p>La petición debe proceder del adulto responsable (familia) o del centro escolar. No hace falta dar ningún dato personal del menor: con el alias basta.</p>
+  </div>
+
+  <h2>Qué se elimina exactamente</h2>
+  <ul>
+    <li>El perfil del menor (nombre o alias) y su contraseña de acceso.</li>
+    <li>Sus huchas, movimientos, paga configurada y objetivos de ahorro.</li>
+    <li>Sus retos de Emprende, cartera e historial de Bolsa simulada.</li>
+    <li>Su progreso y resultados en Academia.</li>
+    <li>Las sesiones anónimas de sincronización asociadas en la nube.</li>
+  </ul>
+
+  <h2>Qué nunca hemos guardado</h2>
+  <p>No pedimos ni almacenamos email, teléfono ni ubicación del menor. Por eso no existe ningún dato de ese tipo que eliminar (ver <a href="privacidad.html">Política de Privacidad</a>).</p>
+
+  <h2>Copias de seguridad</h2>
+  <p>Tras una eliminación, los datos pueden persistir hasta <strong>14 días como máximo</strong> en las copias de seguridad automáticas del sistema, por seguridad ante borrados accidentales. Pasado ese plazo, el borrado es definitivo y las copias se sobrescriben. Las copias residen en servidores de la UE.</p>
+
+  <h2>¿Dudas?</h2>
+  <p>Escríbenos a <strong>monlopsal@gmail.com</strong> y te ayudamos en el idioma que hable tu familia: español.</p>
+
+  <div class="mini">
+    <p><strong>En resumen:</strong> borras el perfil desde la Zona de la Familia y desaparece al momento (también de la nube). Si prefieres, escríbenos y lo borramos en un máximo de 7 días hábiles. Las copias de seguridad se limpian en un máximo de 14 días.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div>🌱 <strong>AFEC1</strong> — Aprende, ahorra, decide, invierte.</div>
+    <div>
+      <a href="app/">La app</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="condiciones.html">Condiciones</a>
+      <a href="aviso-legal.html">Aviso Legal</a>
+      <a href="eliminar-datos.html">Eliminar datos</a>
+      <a href="mailto:monlopsal@gmail.com">Contacto</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
