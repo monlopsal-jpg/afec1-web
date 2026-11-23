@@ -147,6 +147,16 @@
     border-radius: 999px;
     margin-bottom: 14px;
   }
+  /* Aviso bajo la moneda: la ley de los navegadores exige UN toque en
+     cualquier parte de la página antes de que el vídeo pueda sonar; la
+     pastilla lo explica y desaparece en cuanto queda desbloqueada. */
+  .moneda-wrap .moneda-sonido {
+    display: block;
+    margin: 8px auto 0;
+    text-align: center;
+    width: fit-content;
+  }
+  .moneda-sonido.oculto { display: none; }
   .hero h1 {
     font-size: clamp(2rem, 4.5vw, 3.2rem);
     line-height: 1.15;
@@ -660,6 +670,7 @@
         <video class="moneda-hero" src="video/moneda_buckle.mp4" poster="video/moneda_poster.jpg" preload="auto" playsinline
                autoplay muted loop
                aria-label="Moneda AFEC girando siempre; el sonido se para cuando no se ve"></video>
+        <div class="moneda-sonido" id="avisoSonidoMoneda">🔊 Toca una vez para oír la moneda</div>
       </div>
       <span class="badge">Educación financiera para niños y adolescentes</span>
       <h1>Aprende, ahorra, <span>decide, invierte.</span></h1>
@@ -986,6 +997,8 @@
     if (!v || !wrap) return;
     var visible = true;
     var desbloqueada = false; // ¿ya puede sonar? (toque del visitante o permiso del navegador)
+    var aviso = wrap.querySelector('.moneda-sonido'); // pastilla «Toca una vez...»
+    function quitaAviso() { if (aviso) aviso.classList.add('oculto'); }
     function estado(e) { wrap.dataset.coinState = e; }
     function sonoridad() {
       var mudo = document.hidden || !visible || !desbloqueada;
@@ -1001,7 +1014,7 @@
     }, { threshold: 0.3 }).observe(wrap);
     document.addEventListener('visibilitychange', sonoridad);
     // Primer toque en CUALQUIER parte de la página = la moneda queda desbloqueada
-    function daVoz() { desbloqueada = true; sonoridad(); }
+    function daVoz() { desbloqueada = true; sonoridad(); quitaAviso(); }
     document.addEventListener('pointerdown', daVoz, { once: true });
     document.addEventListener('keydown', daVoz, { once: true });
     document.addEventListener('touchstart', daVoz, { once: true });
@@ -1010,6 +1023,7 @@
     v.play().then(function () {
       desbloqueada = true;
       sonoridad();
+      quitaAviso();
     }).catch(function () {
       // el navegador lo prohibió: arranca en silencio hasta el primer toque
       desbloqueada = false;
