@@ -1017,11 +1017,16 @@
       sonoridad();
     }, { threshold: 0.3 }).observe(wrap);
     document.addEventListener('visibilitychange', sonoridad);
-    // Primer toque en CUALQUIER parte de la página = la moneda queda desbloqueada
+    // Primer toque en CUALQUIER parte de la página = la moneda queda desbloqueada.
+    // OJO MÓVIL: los navegadores dan el permiso de sonido al LEVANTAR el dedo
+    // (touchend / pointerup), no al apoyarlo (touchstart) — por eso el unlock
+    // móvil necesita los dos momentos; en PC el clic es pointerdown+up seguidos.
     function daVoz() { desbloqueada = true; sonoridad(); quitaAviso(); }
     document.addEventListener('pointerdown', daVoz, { once: true });
     document.addEventListener('keydown', daVoz, { once: true });
     document.addEventListener('touchstart', daVoz, { once: true });
+    document.addEventListener('touchend', daVoz, { once: true });
+    document.addEventListener('pointerup', daVoz, { once: true });
     // El vídeo NUNCA se para: arranca en bucle y sigue girando aunque no se vea.
     v.muted = false; // intenta sonar directamente al abrir
     v.play().then(function () {
