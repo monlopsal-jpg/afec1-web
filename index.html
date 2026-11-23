@@ -659,7 +659,7 @@
       <div class="moneda-wrap">
         <video class="moneda-hero" src="video/moneda_buckle.mp4" poster="video/moneda_poster.jpg" preload="auto" playsinline
                autoplay muted loop
-               aria-label="Moneda AFEC girando sola; suena a partir del primer toque"></video>
+               aria-label="Moneda AFEC girando siempre; el sonido se para cuando no se ve"></video>
       </div>
       <span class="badge">Educación financiera para niños y adolescentes</span>
       <h1>Aprende, ahorra, <span>decide, invierte.</span></h1>
@@ -946,10 +946,9 @@
   // VÍDEOS (petición Mónica 20-11-26 noche): los vídeos de lección y Valería
   // NO se reproducen solos: imagen fija + botón ▶; al tocar se ven y se OYEN
   // una sola vez y al terminar se para y vuelve el ▶. Sin bucle.
-  // EXCEPCIÓN 23-11-26 (petición Mónica): la MONEDA Buckle del hero gira SOLA,
-  // en bucle, sin botón; arranca en silencio (así lo exigen los navegadores)
-  // y empieza a sonar al primer toque del visitante. Si la moneda no se ve
-  // (se hace scroll o la pestaña se esconde), vídeo y sonido se PARAN.
+  // EXCEPCIÓN 23-11-26 v2 (petición Mónica): la MONEDA Buckle del hero gira
+  // SIEMPRE, incluso cuando no se ve; solo el SONIDO se apaga al dejar de
+  // verla y vuelve al reaparecer.
   function prepararVideo(v, wrap) {
     if (!v || !wrap) return;
     var btn = document.createElement('button');
@@ -975,38 +974,51 @@
     v.addEventListener('pause', function () { wrap.classList.remove('reproduciendo'); });
     v.addEventListener('ended', function () { wrap.classList.remove('reproduciendo'); });
   }
-  // La moneda Buckle (23-11-26): gira sola y se para si no se ve.
-  // data-coin-state en el wrap = 'girando' | 'parado' (gancho de verificación).
+  // La moneda Buckle (23-11-26 v2, petición Mónica): gira SIEMPRE (bucle,
+  // nunca se para, ni siquiera al hacer scroll o cambiar de pestaña).
+  // El SONIDO: intenta sonar directamente al abrir; si el navegador lo
+  // prohíbe (ley de los navegadores sin un toque previo), queda en silencio
+  // hasta el PRIMER toque en cualquier parte de la página, y a partir de ahí
+  // suena siempre que la moneda esté a la vista. Al dejar de verse (scroll
+  // o pestaña escondida) el sonido se apaga solo; al volver, suena otra vez.
+  // data-coin-state en el wrap = 'sonando' | 'mudo' (gancho de verificación).
   function monedaAuto(v, wrap) {
     if (!v || !wrap) return;
     var visible = true;
+    var desbloqueada = false; // ¿ya puede sonar? (toque del visitante o permiso del navegador)
     function estado(e) { wrap.dataset.coinState = e; }
-    v.addEventListener('play', function () { estado('girando'); });
-    v.addEventListener('pause', function () { estado('parado'); });
+    function sonoridad() {
+      var mudo = document.hidden || !visible || !desbloqueada;
+      v.muted = mudo;
+      v.volume = 1;
+      estado(mudo ? 'mudo' : 'sonando');
+    }
     // timeupdate solo salta si los fotogramas avanzan de verdad (gancho de verificación)
     v.addEventListener('timeupdate', function () { wrap.dataset.coinTime = String(Math.round(v.currentTime * 10) / 10); });
-    function decide() {
-      if (document.hidden || !visible) {
-        if (!v.paused) v.pause();
-        estado('parado');
-      } else {
-        var p = v.play();
-        if (p && p.catch) p.catch(function () {});
-      }
-    }
     new IntersectionObserver(function (entradas) {
       visible = entradas[0].isIntersecting;
-      decide();
+      sonoridad();
     }, { threshold: 0.3 }).observe(wrap);
-    document.addEventListener('visibilitychange', decide);
-    // Los navegadores exigen silencio al arrancar solo: al primer toque, suena.
-    function daVoz() {
-      v.muted = false;
-      v.volume = 1;
-    }
+    document.addEventListener('visibilitychange', sonoridad);
+    // Primer toque en CUALQUIER parte de la página = la moneda queda desbloqueada
+    function daVoz() { desbloqueada = true; sonoridad(); }
     document.addEventListener('pointerdown', daVoz, { once: true });
     document.addEventListener('keydown', daVoz, { once: true });
-    decide();
+    document.addEventListener('touchstart', daVoz, { once: true });
+    // El vídeo NUNCA se para: arranca en bucle y sigue girando aunque no se vea.
+    v.muted = false; // intenta sonar directamente al abrir
+    v.play().then(function () {
+      desbloqueada = true;
+      sonoridad();
+    }).catch(function () {
+      // el navegador lo prohibió: arranca en silencio hasta el primer toque
+      desbloqueada = false;
+      v.muted = true;
+      sonoridad();
+      var p2 = v.play();
+      if (p2 && p2.catch) p2.catch(function () {});
+    });
+    sonoridad();
   }
   monedaAuto(document.querySelector('.moneda-hero'), document.querySelector('.moneda-wrap'));
   prepararVideo(document.getElementById('leccionVideo'), document.querySelector('.leccion-video'));
