@@ -134,29 +134,8 @@
   .leccion-video .btn-play { width: 40px; height: 40px; font-size: 15px; }
   .pant-video .btn-play { width: 44px; height: 44px; font-size: 17px; }
   .reproduciendo .btn-play { display: none; } /* mientras se reproduce, el ▶ desaparece */
-  .moneda-sonido {
-    display: inline-block;
-    border: 0;
-    cursor: pointer;
-    background: rgba(0,0,0,0.65);
-    color: #fff;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 14px;
-  }
-  /* Aviso bajo la moneda: la ley de los navegadores exige UN toque en
-     cualquier parte de la página antes de que el vídeo pueda sonar; la
-     pastilla lo explica y desaparece en cuanto queda desbloqueada. */
-  .moneda-wrap .moneda-sonido {
-    display: block;
-    margin: 8px auto 0;
-    text-align: center;
-    width: fit-content;
-  }
-  .moneda-sonido.oculto { display: none; }
+  /* La moneda no lleva pastilla de sonido: se desbloquea con el primer
+     toque/barrido de la página, sin ningún cartel (petición de Mónica, 23-11). */
   .hero h1 {
     font-size: clamp(2rem, 4.5vw, 3.2rem);
     line-height: 1.15;
@@ -996,8 +975,8 @@
     if (!v || !wrap) return;
     var visible = true;
     var desbloqueada = false; // ¿ya puede sonar? (toque del visitante o permiso del navegador)
-    var aviso = wrap.querySelector('.moneda-sonido'); // pastilla «Toca una vez...»
-    function quitaAviso() { if (aviso) aviso.classList.add('oculto'); }
+    // Sin pastilla ni aviso: el sonido se desbloquea con el primer toque/barrido
+    // de la página, sin ningún cartel (petición de Mónica, 23-11).
     function estado(e) { wrap.dataset.coinState = e; }
     function sonoridad() {
       var mudo = document.hidden || !visible || !desbloqueada;
@@ -1020,7 +999,7 @@
     // OJO MÓVIL: los navegadores dan el permiso de sonido al LEVANTAR el dedo
     // (touchend / pointerup), no al apoyarlo (touchstart) — por eso el unlock
     // móvil necesita los dos momentos; en PC el clic es pointerdown+up seguidos.
-    function daVoz() { desbloqueada = true; sonoridad(); quitaAviso(); }
+    function daVoz() { desbloqueada = true; sonoridad(); }
     document.addEventListener('pointerdown', daVoz, { once: true });
     document.addEventListener('keydown', daVoz, { once: true });
     document.addEventListener('touchstart', daVoz, { once: true });
@@ -1031,7 +1010,6 @@
     v.play().then(function () {
       desbloqueada = true;
       sonoridad();
-      quitaAviso();
     }).catch(function () {
       // el navegador lo prohibió: arranca en silencio hasta el primer toque
       desbloqueada = false;
