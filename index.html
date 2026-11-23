@@ -1089,7 +1089,18 @@
 </script>
 
 <!-- Cloudflare Web Analytics: estadisticas anonimas sin cookies (23-11-26) -->
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d317f71c030a409cb2e9372ed9cc18bd"}'></script>
+<script>
+// Contador solo en la web real: las copias locales (file://) NO cuentan,
+// para que las pruebas propias no ensucien las visitas de verdad.
+(function () {
+  if (!/^(www\.)?afec1\.es$/.test(location.hostname)) return;
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', '{"token": "d317f71c030a409cb2e9372ed9cc18bd"}');
+  document.body.appendChild(s);
+})();
+</script>
 <!-- End Cloudflare Web Analytics -->
 </body>
 </html>
