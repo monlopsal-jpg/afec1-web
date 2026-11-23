@@ -657,8 +657,9 @@
   <div class="hero-inner">
     <div>
       <div class="moneda-wrap">
-        <video class="moneda-hero" src="video/moneda_buckle.mp4" poster="video/moneda_poster.jpg" preload="metadata" playsinline
-               aria-label="Moneda AFEC: pulsa el play para verla y oírla una vez"></video>
+        <video class="moneda-hero" src="video/moneda_buckle.mp4" poster="video/moneda_poster.jpg" preload="auto" playsinline
+               autoplay muted loop
+               aria-label="Moneda AFEC girando sola; suena a partir del primer toque"></video>
       </div>
       <span class="badge">Educación financiera para niños y adolescentes</span>
       <h1>Aprende, ahorra, <span>decide, invierte.</span></h1>
@@ -942,10 +943,13 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // VÍDEOS (petición Mónica 20-11-26 noche): nada se reproduce solo.
-  // Cada vídeo se ve congelado (su imagen fija) con un botón ▶.
-  // Al tocar el ▶ se ve y se OYE una sola vez; al terminar se para y vuelve el ▶.
-  // Si quiere volver a verlo: pulsa el ▶ de nuevo. Sin bucle.
+  // VÍDEOS (petición Mónica 20-11-26 noche): los vídeos de lección y Valería
+  // NO se reproducen solos: imagen fija + botón ▶; al tocar se ven y se OYEN
+  // una sola vez y al terminar se para y vuelve el ▶. Sin bucle.
+  // EXCEPCIÓN 23-11-26 (petición Mónica): la MONEDA Buckle del hero gira SOLA,
+  // en bucle, sin botón; arranca en silencio (así lo exigen los navegadores)
+  // y empieza a sonar al primer toque del visitante. Si la moneda no se ve
+  // (se hace scroll o la pestaña se esconde), vídeo y sonido se PARAN.
   function prepararVideo(v, wrap) {
     if (!v || !wrap) return;
     var btn = document.createElement('button');
@@ -971,7 +975,40 @@
     v.addEventListener('pause', function () { wrap.classList.remove('reproduciendo'); });
     v.addEventListener('ended', function () { wrap.classList.remove('reproduciendo'); });
   }
-  prepararVideo(document.querySelector('.moneda-hero'), document.querySelector('.moneda-wrap'));
+  // La moneda Buckle (23-11-26): gira sola y se para si no se ve.
+  // data-coin-state en el wrap = 'girando' | 'parado' (gancho de verificación).
+  function monedaAuto(v, wrap) {
+    if (!v || !wrap) return;
+    var visible = true;
+    function estado(e) { wrap.dataset.coinState = e; }
+    v.addEventListener('play', function () { estado('girando'); });
+    v.addEventListener('pause', function () { estado('parado'); });
+    // timeupdate solo salta si los fotogramas avanzan de verdad (gancho de verificación)
+    v.addEventListener('timeupdate', function () { wrap.dataset.coinTime = String(Math.round(v.currentTime * 10) / 10); });
+    function decide() {
+      if (document.hidden || !visible) {
+        if (!v.paused) v.pause();
+        estado('parado');
+      } else {
+        var p = v.play();
+        if (p && p.catch) p.catch(function () {});
+      }
+    }
+    new IntersectionObserver(function (entradas) {
+      visible = entradas[0].isIntersecting;
+      decide();
+    }, { threshold: 0.3 }).observe(wrap);
+    document.addEventListener('visibilitychange', decide);
+    // Los navegadores exigen silencio al arrancar solo: al primer toque, suena.
+    function daVoz() {
+      v.muted = false;
+      v.volume = 1;
+    }
+    document.addEventListener('pointerdown', daVoz, { once: true });
+    document.addEventListener('keydown', daVoz, { once: true });
+    decide();
+  }
+  monedaAuto(document.querySelector('.moneda-hero'), document.querySelector('.moneda-wrap'));
   prepararVideo(document.getElementById('leccionVideo'), document.querySelector('.leccion-video'));
   prepararVideo(document.getElementById('videoEmprende'), document.querySelector('.pant-video'));
 
