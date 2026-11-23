@@ -1004,6 +1004,10 @@
       var mudo = document.hidden || !visible || !desbloqueada;
       v.muted = mudo;
       v.volume = 1;
+      // Chapa anti-quirk: algún Chrome (el actualizado de 23-11) puede PAUSAR
+      // el vídeo justo al quitarle el mute. Si al tocarle sonar está parado,
+      // lo reanuda aquí mismo, dentro del mismo gesto del visitante.
+      if (!mudo && v.paused) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
       estado(mudo ? 'mudo' : 'sonando');
     }
     // timeupdate solo salta si los fotogramas avanzan de verdad (gancho de verificación)
