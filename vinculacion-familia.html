@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo vincular a tu hijo con la familia · AFEC1</title>
+<meta name="description" content="Guía paso a paso para familias: vincula el perfil del menor con la familia (menores y mayores de 14 años) y activa su colegio con los códigos del profesor.">
+<style>
+  :root {
+    --verde: #4CAF50;
+    --verde-oscuro: #2E7D32;
+    --verde-fondo: rgba(76, 175, 80, 0.1);
+    --azul: #2196F3;
+    --texto: #212121;
+    --texto-suave: #616161;
+    --fondo: #FAFAFA;
+    --blanco: #FFFFFF;
+    --radio: 16px;
+    --sombra: 0 4px 14px rgba(0,0,0,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Roboto, 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+  }
+
+  /* ===== HEADER (idéntico a la portada) ===== */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--blanco);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .nav {
+    max-width: 1100px; margin: 0 auto; padding: 8px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 1.35rem;
+    color: var(--verde-oscuro); text-decoration: none; letter-spacing: 0.5px;
+  }
+  .logo-icon {
+    width: 52px; height: 52px;
+    background: #ffffff; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .nav-links { display: flex; gap: 22px; align-items: center; }
+  .nav-links a {
+    color: var(--texto-suave); text-decoration: none;
+    font-weight: 500; font-size: 0.95rem; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--verde-oscuro); }
+  .nav-cta {
+    background: var(--verde); color: white !important;
+    padding: 9px 20px; border-radius: 24px; font-weight: 600;
+  }
+  @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(160deg, var(--verde) 0%, var(--verde-oscuro) 100%);
+    color: white; padding: 56px 20px 48px; text-align: center;
+  }
+  .hero .badge {
+    display: inline-block; background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    padding: 6px 16px; border-radius: 999px;
+    font-size: 0.85rem; font-weight: 600; letter-spacing: 0.4px;
+  }
+  .hero h1 { font-size: 2rem; margin: 16px auto 10px; max-width: 720px; line-height: 1.25; }
+  .hero p { max-width: 640px; margin: 0 auto; opacity: 0.94; font-size: 1.02rem; }
+
+  /* ===== CONTENIDO ===== */
+  main { max-width: 880px; margin: 0 auto; padding: 44px 20px 20px; }
+  .lead {
+    font-size: 1.05rem; color: var(--texto-suave);
+    max-width: 720px; margin: 0 auto 30px; text-align: center;
+  }
+  .indice {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+    margin: 0 auto 38px;
+  }
+  .indice a {
+    background: var(--verde-fondo); border: 1px solid rgba(76,175,80,0.3);
+    color: var(--verde-oscuro); padding: 8px 18px; border-radius: 999px;
+    font-size: 0.9rem; font-weight: 600; text-decoration: none;
+  }
+  .indice a:hover { background: rgba(76,175,80,0.18); }
+  .bloque-titulo {
+    color: var(--verde-oscuro); font-size: 1.45rem; line-height: 1.3;
+    margin: 46px 0 4px;
+  }
+  .bloque-nota {
+    color: var(--texto-suave); font-size: 0.98rem; margin: 0 0 18px;
+  }
+  .fase-titulo {
+    color: var(--texto); font-size: 1.18rem; margin: 34px 0 4px;
+  }
+  .fase-nota {
+    color: var(--texto-suave); font-size: 0.92rem; margin: 0 0 14px;
+  }
+  .escenario-titulo {
+    color: var(--verde-oscuro); font-size: 1.05rem; font-weight: 700;
+    margin: 26px 0 12px;
+  }
+  .paso {
+    display: flex; gap: 18px; align-items: flex-start;
+    background: var(--blanco); border-radius: var(--radio);
+    box-shadow: var(--sombra); padding: 24px; margin-bottom: 22px;
+  }
+  .num {
+    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%;
+    background: var(--verde); color: white;
+    font-weight: 800; font-size: 1.15rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 8px rgba(76,175,80,0.35);
+  }
+  .paso h3 { font-size: 1.15rem; color: var(--verde-oscuro); margin-bottom: 6px; }
+  .paso p { font-size: 0.98rem; color: var(--texto-suave); }
+  .paso strong { color: var(--texto); }
+  .captura {
+    display: block; max-width: 360px; width: 100%;
+    margin: 16px auto 6px;
+    border-radius: 18px;
+    box-shadow: var(--sombra);
+  }
+  .pie-foto {
+    text-align: center; color: #9E9E9E;
+    font-size: 0.82rem; margin: 4px 0 0;
+  }
+  .ayuda {
+    background: var(--verde-fondo); border: 1px solid rgba(76,175,80,0.3);
+    border-radius: var(--radio); padding: 26px; margin: 34px 0 10px;
+  }
+  .ayuda h2 { color: var(--verde-oscuro); font-size: 1.25rem; margin-bottom: 12px; }
+  .ayuda li { margin-bottom: 10px; font-size: 0.95rem; color: var(--texto-suave); }
+  .ayuda ul { padding-left: 20px; }
+  .ayuda strong { color: var(--texto); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #1B5E20; color: rgba(255,255,255,0.85);
+    padding: 40px 20px; margin-top: 56px;
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; font-size: 0.9rem;
+  }
+  footer a { color: rgba(255,255,255,0.85); text-decoration: none; margin-left: 22px; }
+  footer a:hover { color: #fff; }
+  @media (max-width: 640px) {
+    .footer-inner { flex-direction: column; }
+    footer a { margin: 6px 12px 0 0; }
+    .hero h1 { font-size: 1.55rem; }
+    .paso { padding: 18px; gap: 14px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <nav class="nav">
+    <a class="logo" href="index.html">
+      <span class="logo-icon"><img src="img/logo-header.png" alt="Logo AFEC1"></span>
+      AFEC1
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="condiciones.html">Condiciones</a>
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a class="nav-cta" href="index.html">Volver a AFEC1</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="badge">Guía para familias</span>
+  <h1>Cómo vincular a tu hijo con la familia</h1>
+  <p>Tres caminos según la edad y el caso: <strong>menores de 14</strong> (todo se prepara
+     desde la Zona de la Familia), <strong>mayores de 14</strong> (pueden crear su perfil solos)
+     y la <strong>vinculación con el colegio</strong>. Cada vínculo se hace una sola vez.</p>
+</section>
+
+<main>
+  <p class="lead">Los códigos de vinculación valen <strong>una sola vez</strong> y caducan a los
+     <strong>30 días</strong>. Apúntalos en un papel cuando los generes: son la llave del enlace.</p>
+
+  <div class="indice">
+    <a href="#menores14">1 · Menores de 14 años</a>
+    <a href="#mayores14">2 · Mayores de 14 años</a>
+    <a href="#colegio">3 · Vinculación con el colegio</a>
+  </div>
+
+  <!-- ==================== 1. MENORES DE 14 ==================== -->
+  <h2 class="bloque-titulo" id="menores14">1. Vinculación familiar: menores de 14 años</h2>
+  <p class="bloque-nota">Con esta edad, el perfil del menor se crea <strong>obligatoriamente desde
+     la Zona de la Familia</strong>: el menor no puede creárselo solo.</p>
+
+  <h3 class="fase-titulo">Fase A · Creación y obtención de credenciales (desde la Zona de la Familia)</h3>
+
+  <div class="paso">
+    <div class="num">1</div>
+    <div>
+      <h3>Crear el perfil familiar</h3>
+      <p>Entra en <strong>Mi Familia</strong> → pulsa <strong>Añadir</strong> → introduce el
+         <strong>apellido de la familia</strong> y un <strong>PIN</strong> → pulsa
+         <strong>Crear perfil</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">2</div>
+    <div>
+      <h3>Dar de alta al menor</h3>
+      <p>Desde la <strong>Zona de la Familia</strong>, pulsa <strong>Añadir perfil del menor</strong> →
+         introduce su <strong>nombre</strong> y su <strong>curso</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">3</div>
+    <div>
+      <h3>Consultar y guardar el PIN del menor</h3>
+      <p>En la tarjeta del menor (dentro de la Zona de la Familia), pulsa el <strong>icono de la lupa</strong>
+         para ver su <strong>PIN</strong> y apúntalo. Lo necesitarás para entrar en su zona.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">4</div>
+    <div>
+      <h3>Generar el código de vinculación</h3>
+      <p>Baja a <strong>Acciones rápidas</strong> → <strong>Gestión familiar</strong> →
+         <strong>Vinculación en la nube</strong> → <strong>Gestionar vinculación</strong>.</p>
+      <p>Elige <strong>Generar código para un menor</strong> → despliega y elige el <strong>nombre del menor</strong>
+         → pulsa <strong>Generar código</strong> y apúntalo.</p>
+    </div>
+  </div>
+
+  <h3 class="fase-titulo">Fase B · Activación y enlace en la Zona del Menor</h3>
+  <p class="fase-nota">Hay dos caminos según dónde vaya a usar la app tu hijo/a:</p>
+
+  <p class="escenario-titulo">Escenario 1 — En el mismo dispositivo de la familia</p>
+
+  <div class="paso">
+    <div class="num">1</div>
+    <div>
+      <h3>Salir de la Zona de la Familia y entrar en la Zona del Menor</h3>
+      <p>Vuelve a la pantalla principal, donde aparecen <strong>Mi Familia</strong> y
+         <strong>Menores</strong>.</p>
+      <img class="captura" src="img/vinculacion-entrada-real.jpg?v=3" alt="Pantalla de entrada de AFEC1 con las opciones Soy Menor, Familia y Profesor">
+      <p class="pie-foto">Pantalla principal de AFEC1: desde aquí se entra en cada zona</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">2</div>
+    <div>
+      <h3>Entrar con el PIN del menor</h3>
+      <p>Selecciona el <strong>perfil del menor</strong> ya creado e introduce su <strong>PIN</strong>
+         (el que consultaste con la lupa en la Fase A).</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">3</div>
+    <div>
+      <h3>Introducir el código en su zona</h3>
+      <p>Dentro de su zona (<strong>Aprende</strong>), baja a <strong>Mi Familia</strong> e introduce el
+         <strong>código de vinculación</strong> generado por los padres para completar el enlace.</p>
+    </div>
+  </div>
+
+  <p class="escenario-titulo">Escenario 2 — En otro dispositivo (móvil o tablet propio del menor)</p>
+
+  <div class="paso">
+    <div class="num">1</div>
+    <div>
+      <h3>Crear el perfil desde el dispositivo del menor</h3>
+      <p>Entra en <strong>Soy Menor</strong> → <strong>Añadir mi perfil</strong> → marca
+         <strong>Tengo menos de 14 años</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">2</div>
+    <div>
+      <h3>Elegir la opción de vincularse</h3>
+      <p>Marca la opción <strong>Tengo código de vinculación</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">3</div>
+    <div>
+      <h3>Rellenar los datos y vincularse</h3>
+      <p>Rellena el <strong>código de vinculación</strong>, el <strong>nombre</strong>, el
+         <strong>PIN</strong> y el <strong>curso</strong> → pulsa
+         <strong>Crear mi perfil y vincularme</strong>. El enlace queda hecho.</p>
+    </div>
+  </div>
+
+  <!-- ==================== 2. MAYORES DE 14 ==================== -->
+  <h2 class="bloque-titulo" id="mayores14">2. Vinculación familiar: mayores de 14 años</h2>
+  <p class="bloque-nota">Con esta edad pueden <strong>crear su propio perfil de forma autónoma</strong>.
+     Si además se vinculan con su familia, disfrutan de <strong>huchas virtuales</strong> y
+     <strong>transferencias entre ellas</strong>.</p>
+
+  <p class="escenario-titulo">Opción 1 — Generando el código desde el dispositivo del menor</p>
+
+  <div class="paso">
+    <div class="num">1</div>
+    <div>
+      <h3>El menor crea su perfil</h3>
+      <p>Entra en <strong>Soy Menor</strong> → <strong>Añadir perfil</strong> → selecciona
+         <strong>Tengo más de 14 años</strong> → introduce <strong>nombre</strong>, <strong>PIN</strong>
+         y <strong>curso</strong> → <strong>Crear perfil</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">2</div>
+    <div>
+      <h3>El menor genera su código</h3>
+      <p>En su zona <strong>Aprende</strong>, baja a <strong>Mi Familia</strong> →
+         <strong>Gestionar vinculación</strong> → <strong>Generar código</strong> → apúntalo.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">3</div>
+    <div>
+      <h3>La familia canjea el código</h3>
+      <p>Entra en la <strong>Zona de la Familia</strong> → <strong>Mi Familia</strong>
+         (si aún no existe el perfil familiar, créalo y añade el perfil del menor).</p>
+      <p>Baja a <strong>Gestión familiar</strong> → <strong>Vinculación en la nube</strong> →
+         <strong>Gestionar vinculación</strong> → <strong>Canjear código menor</strong>.</p>
+      <p>En la casilla <strong>Menor</strong>, despliega y elige al alumno; en <strong>Código</strong>,
+         introduce el código que te dio el menor → pulsa <strong>Vincular</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">4</div>
+    <div>
+      <h3>Confirmación</h3>
+      <p>En el perfil del menor dentro de la Zona de la Familia aparecerá el icono de
+         <strong>«Familia»</strong>: el vínculo está hecho.</p>
+    </div>
+  </div>
+
+  <p class="escenario-titulo">Opción 2 — Generando el código desde la Zona de la Familia</p>
+
+  <div class="paso">
+    <div class="num">1</div>
+    <div>
+      <h3>La familia da de alta y genera el código</h3>
+      <p>Entra en <strong>Mi Familia</strong> → introduce el <strong>apellido de la familia</strong> y su
+         <strong>PIN</strong>.</p>
+      <p>Pulsa <strong>Añadir perfil del menor</strong> → introduce <strong>nombre</strong> y
+         <strong>curso</strong>.</p>
+      <p>Ve a <strong>Gestión familiar</strong> → <strong>Vinculación en la nube</strong> →
+         <strong>Gestionar vinculación</strong> → <strong>Generar código para un menor</strong>.</p>
+      <p>En <strong>Menor</strong>, despliega y selecciona al menor → pulsa
+         <strong>Generar código</strong> y apúntalo.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">2</div>
+    <div>
+      <h3>El menor se da de alta y se enlaza</h3>
+      <p>Sal de la Zona de la Familia y entra en la <strong>Zona del Menor</strong> →
+         <strong>Añadir mi perfil</strong> → selecciona <strong>Tengo más de 14 años</strong> →
+         introduce <strong>nombre</strong>, <strong>PIN</strong> y <strong>curso</strong> →
+         <strong>Crear mi perfil</strong>.</p>
+      <p>En su zona <strong>Aprende</strong>, baja a <strong>Mi Familia</strong> → introduce el
+         <strong>código de la familia</strong> → pulsa <strong>Vincular</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">3</div>
+    <div>
+      <h3>Confirmación</h3>
+      <p>A los pocos minutos aparecerá vinculado a la familia en la <strong>página 2</strong> de
+         <strong>Aprende</strong> (deslizando la pantalla, donde están las huchas).</p>
+    </div>
+  </div>
+
+  <!-- ==================== 3. COLEGIO ==================== -->
+  <h2 class="bloque-titulo" id="colegio">3. Vinculación escolar: menor ↔ profesor</h2>
+  <p class="bloque-nota">Activa el <strong>entorno educativo del centro escolar</strong>. El profesor
+     entrega una <strong>hoja de bienvenida</strong> con dos códigos impresos (sirven una sola vez y
+     caducan a los 30 días). Tienes también la
+     <a href="vinculacion-colegio.html">guía detallada del colegio</a>.</p>
+
+  <div class="paso">
+    <div class="num">1</div>
+    <div>
+      <h3>Abrir el módulo escolar</h3>
+      <p>El alumno entra en su <strong>Zona del Menor</strong> → pantalla <strong>Aprende</strong> →
+         baja hasta el apartado <strong>Mi Colegio</strong> y lo pulsa.</p>
+      <img class="captura" src="img/vinculacion-micolegio-real.jpg?v=3" alt="Pantalla real de Mi colegio en AFEC1 con los huecos del ID AFEC y el código de vinculación">
+      <p class="pie-foto">Pantalla «Mi colegio»: aquí van los dos códigos de la hoja del profesor</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">2</div>
+    <div>
+      <h3>Introducir las credenciales del profesor</h3>
+      <p>En la casilla <strong>Tu ID AFEC</strong>: el código identificador del profesor.</p>
+      <p>En la casilla <strong>Código de vinculación</strong>: el código individual que facilitó
+         el profesor. Ojo con el <strong>0</strong> y la <strong>O</strong>, el <strong>1</strong>
+         y la <strong>I</strong>.</p>
+    </div>
+  </div>
+
+  <div class="paso">
+    <div class="num">3</div>
+    <div>
+      <h3>Activar</h3>
+      <p>Pulsa <strong>Vincular</strong>. Si el código da error, comprueba que cada código va en su
+         hueco: no se intercambian entre sí.</p>
+    </div>
+  </div>
+
+  <div class="ayuda">
+    <h2>Lo que se desbloquea en «Mi Colegio»</h2>
+    <ul>
+      <li><strong>Academia:</strong> 60 clases estructuradas con preguntas de repaso.</li>
+      <li><strong>Zona Emprende:</strong> simulador práctico para crear y gestionar un negocio.</li>
+      <li><strong>Juegos educativos:</strong> dinámicas vinculadas directamente a las lecciones
+          de la Academia.</li>
+      <li><strong>Market:</strong> simulador de bolsa adaptado al nivel del alumno para aprender
+          a razonar con noticias y empresas ficticias.</li>
+    </ul>
+  </div>
+
+  <div class="ayuda">
+    <h2>¿Y si algo falla?</h2>
+    <ul>
+      <li><strong>«Código no válido»:</strong> cada código vale <strong>una sola vez</strong> y caduca
+          a los <strong>30 días</strong>. Comprueba mayúsculas y que no lo has usado ya.</li>
+      <li><strong>No encuentro «Gestión familiar» o «Mi Familia»:</strong> están dentro de la
+          <strong>Zona de la Familia</strong> (se entra con el PIN de la familia).</li>
+      <li><strong>El menor se equivocó de PIN:</strong> desde la tarjeta del menor en la Zona de la
+          Familia puedes consultarlo con el <strong>icono de la lupa</strong>.</li>
+      <li><strong>Privacidad:</strong> por internet solo viaja una versión «sellada» de los códigos
+          (indescifrable) para comprobar que son auténticos. Los códigos legibles solo existen
+          donde se generaron.</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>AFEC1 · Educación financiera para menores, diseñada para protegerlos.</span>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="condiciones.html">Condiciones</a>
+      <a href="aviso-legal.html">Aviso legal</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Cloudflare Web Analytics -->
+<script>
+// Contador solo en la web real: las copias locales (file://) NO cuentan,
+// para que las pruebas propias no ensucien las visitas de verdad.
+(function () {
+  if (!/^(www\.)?afec1\.es$/.test(location.hostname)) return;
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', '{"token": "d317f71c030a409cb2e9372ed9cc18bd"}');
+  document.body.appendChild(s);
+})();
+</script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
